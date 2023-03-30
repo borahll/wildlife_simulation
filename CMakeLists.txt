@@ -10,4 +10,4 @@ add_executable(wildlife_simulation
         22101852_Bora_Haliloglu_hw3/Creatures.hpp
         22101852_Bora_Haliloglu_hw3/Food.cpp
         22101852_Bora_Haliloglu_hw3/Food.hpp
-        22101852_Bora_Haliloglu_hw3/SimulationMgr.cpp)
+        22101852_Bora_Haliloglu_hw3/SimulationMgr.cpp 22101852_Bora_Haliloglu_hw3/CreatureLibrary.hpp 22101852_Bora_Haliloglu_hw3/CreatureLibrary.cpp)

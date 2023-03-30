@@ -1,16 +1,18 @@
 /**
-* Author : Bora Haliloglu
+* Author : Bora Haliloglu & ALY
 * ID: 22101852
 * Section : 2
 * Homework : 3
 * Description : description of your code
 */
-
+/*
+ * TODO:
+ * */
 #include "Creatures.hpp"
 #include <iostream>
 #include <cmath>
 using namespace std;
-Creatures::Creatures(int id, double health, double x, double y) {
+Creatures::Creatures(int id, double health, double x, double y): id(id), health(health), x(x), y(y){
 
 }
 
@@ -54,30 +56,6 @@ void Creatures::setDead(bool dead) {
     Creatures::dead = dead;
 }
 
-double Creatures::calculateDistance(double x1, double y1, double x2, double y2) {
-    return sqrt(std::pow(x2 - x1, 2) + std::pow(y2 - y1, 2));
-}
 
-void Creatures::fight(vector<Creatures*> &fighters) {
-    for (auto& attacker : fighters) {
-        if (attacker->isDead()) continue;
-        for (auto& defender : fighters) {
-            if (defender->isDead() || defender->getId() <= attacker->getId()) continue;
-            if (calculateDistance(attacker->getX(), attacker->getY(), defender->getX(), defender->getY()) <= 2 &&
-                defender->getHealth() <= attacker->getHealth()) {
-                defender->setDead(true);
-            }
-        }
-    }
-}
 
-Food *Creatures::bestFoodFinder(vector<Food*> &foods) {
-    Food* bestFood = nullptr;
-    for (auto& food : foods) {
-        if (bestFood == nullptr || food->getQuality() > bestFood->getQuality() ||
-            (food->getQuality() == bestFood->getQuality() && food->getId() < bestFood->getId())) {
-            bestFood = food;
-        }
-    }
-    return bestFood;
-}
+

@@ -23,9 +23,6 @@ public:
     void setY(double y);
     bool isDead() const;
     void setDead(bool dead);
-    double calculateDistance(double x1, double y1, double x2, double y2);
-    void fight(std::vector<Creatures*>& fighters);
-    Food* bestFoodFinder(std::vector<Food*>& foods);
 private:
     int id;
     double health;

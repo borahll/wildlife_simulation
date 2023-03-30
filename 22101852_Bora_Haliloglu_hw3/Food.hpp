@@ -25,6 +25,11 @@ private:
     int id;
     double x,y;
     int quality;
+    bool eaten;
+public:
+    bool isEaten() const;
+
+    void setEaten(bool eaten);
 };
 
 

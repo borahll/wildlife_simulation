@@ -54,7 +54,7 @@ void CreatureLibrary::gameEngine(vector<Food *> &foods, vector<Creatures *> &cre
     }
 }
 
-bool CreatureLibrary::isFighting(Creatures *aCreature, vector<Creatures *> allCreatures) {
+bool CreatureLibrary::isFighting(Creatures* &aCreature, vector<Creatures *> &allCreatures) {
     for (auto& attacker : allCreatures) {
         if (attacker->isDead()) continue;
         for (auto& defender : allCreatures) {
@@ -68,7 +68,7 @@ bool CreatureLibrary::isFighting(Creatures *aCreature, vector<Creatures *> allCr
     return false;
 }
 
-bool CreatureLibrary::canEat(Food *foodPtr, Creatures *theCreature) {
+bool CreatureLibrary::canEat(Food* &foodPtr, Creatures* &theCreature) {
     if(calculateDistance(theCreature->getX(), theCreature->getY(), foodPtr->getX(), foodPtr->getY()) < 1){
         foodPtr->setEaten(true);
         theCreature->setHealth(theCreature->getHealth() + foodPtr->getQuality());
@@ -77,6 +77,15 @@ bool CreatureLibrary::canEat(Food *foodPtr, Creatures *theCreature) {
     return false;
 }
 
-void CreatureLibrary::getCloser(Creatures * Creature, Food *bestFoodPtr) {
-    //TODO
+void CreatureLibrary::getCloser(Creatures* &Creature, Food* &bestFoodPtr) {
+        int dx = static_cast<int>(bestFoodPtr->getX() - Creature->getX());
+        int dy = static_cast<int>(bestFoodPtr->getY() - Creature->getY());
+        double dist = calculateDistance(Creature->getX(), Creature->getY(), bestFoodPtr->getX(), bestFoodPtr->getY());
+        int max_dist = (Creature->getHealth() > 10) ? static_cast<int>(Creature->getHealth() / 10) : 1;
+        double scale = max_dist / dist;
+        int new_x = static_cast<int>(Creature->getX()) + static_cast<int>(dx * scale);
+        int new_y = static_cast<int>(Creature->getY()) + static_cast<int>(dy * scale);
+        Creature->setX(new_x);
+        Creature->setY(new_y);
+
 }

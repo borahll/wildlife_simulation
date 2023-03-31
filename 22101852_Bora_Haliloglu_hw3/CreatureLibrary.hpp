@@ -20,9 +20,9 @@ public:
     Food* bestFoodFinder(vector<Food*> &foods);
     double calculateDistance(double x1, double y1, double x2, double y2);
     void gameEngine(vector<Food*>& foods, vector<Creatures*>& creatures);
-    bool isFighting(Creatures* aCreature, vector<Creatures*> allCreatures);
-    bool canEat(Food* foodPtr, Creatures* theCreature);
-    void getCloser(Creatures* allCreatures, Food* bestFoodPtr);
+    bool isFighting(Creatures* &aCreature, vector<Creatures*>& allCreatures);
+    bool canEat(Food* &foodPtr, Creatures* &theCreature);
+    void getCloser(Creatures* &allCreatures, Food* &bestFoodPtr);
 };
 
 

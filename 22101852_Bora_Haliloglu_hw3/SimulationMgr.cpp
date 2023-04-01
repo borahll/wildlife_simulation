@@ -9,21 +9,50 @@
 #include <iostream>
 #include <string>
 #include <queue>
-#include "Food.hpp"
-#include "Creatures.hpp"
+#include "CreatureLibrary.hpp"
 #include <fstream>
 #include <stack>
+#include <iomanip>
 using namespace std;
-void const checkTheInput(string const str);
-vector<Creatures*> allCreatures;
-priority_queue<Food*, vector<Food*>, compare_all> allFoods;
-priority_queue<Food*, vector<Food*>, compare_Quality> ingameFood;
-int main(){
 
+void const checkTheInput(string const str);
+void gameLoop(int time);
+void addToInGame(priority_queue<Food*, vector<Food*>, compare_all> allFoods, priority_queue<Food*, vector<Food*>, compare_Quality>& ingame, int time);
+bool checkIfAllEaten();
+void print();
+CreatureLibrary c;
+int main() {
+    setprecision(3);
     checkTheInput("input.txt");
+    int time = 0;
+    while (!checkIfAllEaten()){
+        gameLoop(time);
+        time++;
+    }
     return 0;
 }
-
+bool checkIfAllEaten(){
+    priority_queue<Food*, vector<Food*>, compare_all> all;
+    all = c.allFoods;
+    while(!all.empty()){
+        if(!all.top()->isEaten()){
+            return false;
+        }
+        all.pop();
+    }
+    return true;
+}
+void gameLoop(int time){
+        addToInGame(c.allFoods, c.ingameFood, time);
+        priority_queue<Food*, vector<Food*>, compare_Quality> temp;
+        vector<Food*> allFood;
+        temp = c.ingameFood;
+        while(!temp.empty()){
+            allFood.push_back(temp.top());
+            temp.pop();
+        }
+        c.gameEngine(allFood, c.allCreatures);
+}
 void const checkTheInput( string const str){
     string inFile = str;
     int begin1 = 0, begin2 = 0;
@@ -55,7 +84,7 @@ void const checkTheInput( string const str){
                 }
             }
             begin2++;
-            int result = stoi(num);
+            double result = stod(num);
             q.push(result);
             entryCount++;
             if(begin2 <= begin1){
@@ -63,33 +92,50 @@ void const checkTheInput( string const str){
                  * Create the new creature and add to the queue
                  */
                 //Creatures* aCreature = new Creatures();
-                cout<<"A Creature is coming:"<<endl;
                 double id = q.front();
                 q.pop();
                 double XCoordinate = q.front();
                 q.pop();
-                int YCoordinate = q.front();
+                double YCoordinate = q.front();
                 q.pop();
-                int health = q.front();
+                double health = q.front();
                 q.pop();
                 Creatures* aCreature = new Creatures(id, health, XCoordinate, YCoordinate);
-                allCreatures.push_back(aCreature);
+                c.allCreatures.push_back(aCreature);
             }
             else{
-                cout<<"A Food is coming:"<<endl;
                 double id = q.front();
                 q.pop();
                 double XCoordinate = q.front();
                 q.pop();
-                int YCoordinate = q.front();
+                double YCoordinate = q.front();
                 q.pop();
-                int quality = q.front();
+                double quality = q.front();
                 q.pop();
-                int spawnTime = q.front();
+                double spawnTime = q.front();
                 q.pop();
                 Food* aFood = new Food(id, XCoordinate, YCoordinate, quality, spawnTime);
-                allFoods.push(aFood);
+                c.allFoods.push(aFood); // all foods
             }
+        }
+    }
+}
+void addToInGame(priority_queue<Food*, vector<Food*>, compare_all> allFoods, priority_queue<Food*, vector<Food*>, compare_Quality>& ingame, int time){
+    while(!ingame.empty()){
+        ingame.pop();
+    }
+    while(!allFoods.empty()){
+        if(allFoods.top()->isEaten()){
+            allFoods.pop();
+            continue;
+        }
+        else{
+            if(allFoods.top()->getSpawnTime() <= time){
+                ingame.push(allFoods.top());
+                allFoods.pop();
+                continue;
+            }
+            allFoods.pop();
         }
     }
 }

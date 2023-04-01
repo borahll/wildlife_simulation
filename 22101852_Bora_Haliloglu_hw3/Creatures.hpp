@@ -30,5 +30,4 @@ private:
     bool dead;
 };
 
-
 #endif //WILDLIFE_SIMULATION_CREATURES_HPP

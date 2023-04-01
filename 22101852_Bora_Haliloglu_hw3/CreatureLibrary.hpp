@@ -13,7 +13,8 @@
 using namespace std;
 class CreatureLibrary {
 public:
-    CreatureLibrary(Creatures* arr);
+    CreatureLibrary();
+    ~CreatureLibrary();
     int len;
     Creatures* arr;//The array of Creatures that will be proccessed
     void fight(vector<Creatures*> &fighters);
@@ -23,6 +24,9 @@ public:
     bool isFighting(Creatures* &aCreature, vector<Creatures*>& allCreatures);
     bool canEat(Food* &foodPtr, Creatures* &theCreature);
     void getCloser(Creatures* &allCreatures, Food* &bestFoodPtr);
+    vector<Creatures*> allCreatures;
+    priority_queue<Food*, vector<Food*>, compare_all> allFoods;
+    priority_queue<Food*, vector<Food*>, compare_Quality> ingameFood;
 };
 
 

@@ -8,8 +8,9 @@
 
 #ifndef WILDLIFE_SIMULATION_FOOD_HPP
 #define WILDLIFE_SIMULATION_FOOD_HPP
-
-
+#include <queue>
+using namespace std;
+struct compare_all;
 class Food {
 public:
     Food(int id, double x, double y, int quality, int spawnTime);
@@ -21,26 +22,21 @@ public:
     void setY(double y);
     int getQuality() const;
     void setQuality(int quality);
+    //void addToInGame(priority_queue<Food*, vector<Food*>, compare_all> allFoods, priority_queue<Food*, vector<Food*>, compare_all> &ingame, int time);
+    bool isEaten() const;
+    void setEaten(bool eaten);
+    int getSpawnTime() const;
+    void setSpawnTime(int spawnTime);
 private:
     int id;
     double x,y;
     int quality;
     bool eaten;
-public:
-    int getSpawnTime() const;
-
-    void setSpawnTime(int spawnTime);
-
-private:
     int spawnTime;
-public:
-    bool isEaten() const;
-
-    void setEaten(bool eaten);
 };
 struct compare_all{
     bool operator()(const Food* food1, const Food* Food2){
-        return (food1->getSpawnTime() < Food2->getSpawnTime());
+        return (food1->getSpawnTime() > Food2->getSpawnTime());
     }
 };
 struct compare_Quality{

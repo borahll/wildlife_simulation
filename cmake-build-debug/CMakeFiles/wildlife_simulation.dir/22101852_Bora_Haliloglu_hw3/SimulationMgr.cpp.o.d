@@ -418,8 +418,12 @@ CMakeFiles/wildlife_simulation.dir/22101852_Bora_Haliloglu_hw3/SimulationMgr.cpp
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/deque \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/__split_buffer \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/vector \
-  /Users/borahaliloglu/Desktop/MacBook/cs202hw3/wildlife_simulation/22101852_Bora_Haliloglu_hw3/Food.hpp \
+  /Users/borahaliloglu/Desktop/MacBook/cs202hw3/wildlife_simulation/22101852_Bora_Haliloglu_hw3/CreatureLibrary.hpp \
   /Users/borahaliloglu/Desktop/MacBook/cs202hw3/wildlife_simulation/22101852_Bora_Haliloglu_hw3/Creatures.hpp \
+  /Users/borahaliloglu/Desktop/MacBook/cs202hw3/wildlife_simulation/22101852_Bora_Haliloglu_hw3/Food.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/cmath \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/math.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/usr/include/math.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/fstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/filesystem \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/stack \

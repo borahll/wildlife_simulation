@@ -59,3 +59,4 @@ int Food::getSpawnTime() const {
 void Food::setSpawnTime(int spawnTime) {
     Food::spawnTime = spawnTime;
 }
+

@@ -3,6 +3,8 @@
 //
 
 #include "CreatureLibrary.hpp"
+#include <algorithm>
+#include <iostream>
 using namespace std;
 void CreatureLibrary::fight(vector<Creatures*> &fighters) {
     for (auto& attacker : fighters) {
@@ -31,12 +33,22 @@ double CreatureLibrary::calculateDistance(double x1, double y1, double x2, doubl
     return sqrt(std::pow(x2 - x1, 2) + std::pow(y2 - y1, 2));
 }
 
-CreatureLibrary::CreatureLibrary(Creatures *arr):arr(arr){
+CreatureLibrary::CreatureLibrary(){
 
 }
 
+bool sortById(const Creatures* a, const Creatures* b){
+    return a->getId() < b->getId();
+}
+void print(vector<Creatures *> &creatures){
+    vector<Creatures *> temp = creatures;
+    std::sort(temp.begin(), temp.end(), sortById);
+    for(auto p: temp){
+        cout << "Creature " << p->getId() << ": " << p->getX() << " ,"  << p->getY() << endl;
+    }
+}
 void CreatureLibrary::gameEngine(vector<Food *> &foods, vector<Creatures *> &creatures) {
-    for(auto& food: foods){
+    //for(auto& food: foods){
         Food* bestFoodptr = bestFoodFinder(foods);
         while(!bestFoodptr->isEaten()){
             for(auto& creature: creatures){
@@ -50,8 +62,9 @@ void CreatureLibrary::gameEngine(vector<Food *> &foods, vector<Creatures *> &cre
                 }
                 getCloser(creature, bestFoodptr);
             }
+            print(creatures);
         }
-    }
+    //}
 }
 
 bool CreatureLibrary::isFighting(Creatures* &aCreature, vector<Creatures *> &allCreatures) {
@@ -87,5 +100,25 @@ void CreatureLibrary::getCloser(Creatures* &Creature, Food* &bestFoodPtr) {
         int new_y = static_cast<int>(Creature->getY()) + static_cast<int>(dy * scale);
         Creature->setX(new_x);
         Creature->setY(new_y);
+}
 
+CreatureLibrary::~CreatureLibrary() {
+    /*
+     *     vector<Creatures*> allCreatures;
+    priority_queue<Food*, vector<Food*>, compare_all> allFoods;
+    priority_queue<Food*, vector<Food*>, compare_Quality> ingameFood;
+     */
+    int a = 0;
+    while(a < allCreatures.size()){
+        delete allCreatures.at(a);
+        a++;
+    }
+    while(!allFoods.empty()){
+        delete allFoods.top();
+        allFoods.pop();
+    }
+    while(!ingameFood.empty()){
+        delete ingameFood.top();
+        ingameFood.pop();
+    }
 }

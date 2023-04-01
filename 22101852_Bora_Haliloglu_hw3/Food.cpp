@@ -8,7 +8,7 @@
 
 #include "Food.hpp"
 
-Food::Food(int id, double x, double y, int quality) : id(id), x(x), y(y), quality(quality), eaten(false){
+Food::Food(int id, double x, double y, int quality, int spawnTime) : id(id), x(x), y(y), quality(quality), eaten(false), spawnTime(spawnTime){
 
 }
 
@@ -50,4 +50,12 @@ bool Food::isEaten() const {
 
 void Food::setEaten(bool eaten) {
     Food::eaten = eaten;
+}
+
+int Food::getSpawnTime() const {
+    return spawnTime;
+}
+
+void Food::setSpawnTime(int spawnTime) {
+    Food::spawnTime = spawnTime;
 }

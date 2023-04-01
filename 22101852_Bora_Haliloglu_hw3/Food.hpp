@@ -12,7 +12,7 @@
 
 class Food {
 public:
-    Food(int id, double x, double y, int quality);
+    Food(int id, double x, double y, int quality, int spawnTime);
     int getId() const;
     void setId(int id);
     double getX() const;
@@ -27,10 +27,26 @@ private:
     int quality;
     bool eaten;
 public:
+    int getSpawnTime() const;
+
+    void setSpawnTime(int spawnTime);
+
+private:
+    int spawnTime;
+public:
     bool isEaten() const;
 
     void setEaten(bool eaten);
 };
-
+struct compare_all{
+    bool operator()(const Food* food1, const Food* Food2){
+        return (food1->getSpawnTime() < Food2->getSpawnTime());
+    }
+};
+struct compare_Quality{
+    bool operator()(const Food* food1, const Food* Food2){
+        return (food1->getQuality() < Food2->getQuality());
+    }
+};
 
 #endif //WILDLIFE_SIMULATION_FOOD_HPP

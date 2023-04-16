@@ -42,7 +42,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics"
+					"fragment" : "-g -fdiagnostics-color=always"
 				},
 				{
 					"fragment" : "-std=gnu++14"
@@ -52,7 +52,7 @@
 			[
 				{
 					"backtrace" : 2,
-					"path" : "/Users/borahaliloglu/Desktop/MacBook/cs202hw3/wildlife_simulation/22101852_Bora_Haliloglu_hw3"
+					"path" : "/home/bhll/wildlife_simulation/22101852_Bora_Haliloglu_hw3"
 				}
 			],
 			"language" : "CXX",

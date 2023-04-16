@@ -13,6 +13,8 @@
 #include <fstream>
 #include <stack>
 #include <iomanip>
+#include <algorithm>
+
 using namespace std;
 
 void const checkTheInput(string const str);

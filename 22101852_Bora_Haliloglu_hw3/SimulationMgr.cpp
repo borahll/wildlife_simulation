@@ -22,7 +22,7 @@ bool checkIfAllEaten();
 void print();
 CreatureLibrary c;
 int main() {
-    setprecision(3);
+    cout.precision(3);
     checkTheInput("input.txt");
     int time = 0;
     while (!checkIfAllEaten()){
@@ -42,7 +42,18 @@ bool checkIfAllEaten(){
     }
     return true;
 }
+bool sortById2(const Creatures* a, const Creatures* b){
+    return a->getId() < b->getId();
+}
+void print(vector<Creatures *> &creatures){
+    vector<Creatures *> temp = creatures;
+    std::sort(temp.begin(), temp.end(), sortById2);
+    for(auto p: temp){
+        cout << "Creature " << p->getId() << ": " << p->getX() << " ,"  << p->getY() << endl;
+    }
+}
 void gameLoop(int time){
+        print(c.allCreatures);
         addToInGame(c.allFoods, c.ingameFood, time);
         priority_queue<Food*, vector<Food*>, compare_Quality> temp;
         vector<Food*> allFood;
@@ -51,7 +62,11 @@ void gameLoop(int time){
             allFood.push_back(temp.top());
             temp.pop();
         }
+        std::sort(c.allCreatures.begin(), c.allCreatures.end(), sortById2);
         c.gameEngine(allFood, c.allCreatures);
+        for(auto &a: c.allCreatures){
+            a->setHealth(a->getHealth() - 1);
+        }
 }
 void const checkTheInput( string const str){
     string inFile = str;

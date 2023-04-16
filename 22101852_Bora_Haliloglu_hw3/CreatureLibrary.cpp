@@ -40,13 +40,7 @@ CreatureLibrary::CreatureLibrary(){
 bool sortById(const Creatures* a, const Creatures* b){
     return a->getId() < b->getId();
 }
-void print(vector<Creatures *> &creatures){
-    vector<Creatures *> temp = creatures;
-    std::sort(temp.begin(), temp.end(), sortById);
-    for(auto p: temp){
-        cout << "Creature " << p->getId() << ": " << p->getX() << " ,"  << p->getY() << endl;
-    }
-}
+
 void CreatureLibrary::gameEngine(vector<Food *> &foods, vector<Creatures *> &creatures) {
     //for(auto& food: foods){
         Food* bestFoodptr = bestFoodFinder(foods);
@@ -62,7 +56,6 @@ void CreatureLibrary::gameEngine(vector<Food *> &foods, vector<Creatures *> &cre
                 }
                 getCloser(creature, bestFoodptr);
             }
-            print(creatures);
         }
     //}
 }
@@ -91,13 +84,13 @@ bool CreatureLibrary::canEat(Food* &foodPtr, Creatures* &theCreature) {
 }
 
 void CreatureLibrary::getCloser(Creatures* &Creature, Food* &bestFoodPtr) {
-        int dx = static_cast<int>(bestFoodPtr->getX() - Creature->getX());
-        int dy = static_cast<int>(bestFoodPtr->getY() - Creature->getY());
+        double dx = static_cast<double>(bestFoodPtr->getX() - Creature->getX());
+        double dy = static_cast<double>(bestFoodPtr->getY() - Creature->getY());
         double dist = calculateDistance(Creature->getX(), Creature->getY(), bestFoodPtr->getX(), bestFoodPtr->getY());
-        int max_dist = (Creature->getHealth() > 10) ? static_cast<int>(Creature->getHealth() / 10) : 1;
+        double max_dist = (Creature->getHealth() > 10) ? static_cast<double>(Creature->getHealth() / 10) : 1;
         double scale = max_dist / dist;
-        int new_x = static_cast<int>(Creature->getX()) + static_cast<int>(dx * scale);
-        int new_y = static_cast<int>(Creature->getY()) + static_cast<int>(dy * scale);
+        double new_x = static_cast<double>(Creature->getX()) + static_cast<double>(dx * scale);
+        double new_y = static_cast<double>(Creature->getY()) + static_cast<double>(dy * scale);
         Creature->setX(new_x);
         Creature->setY(new_y);
 }
